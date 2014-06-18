@@ -9,14 +9,14 @@ import java.util.StringTokenizer;
 public class Absorption extends AbstractRule{
 
     @Override
-    public boolean exec(String rule, FactContainer facts, ArrayList<String> sentences) {
+    public boolean exec(String rule, FactContainer facts,FactContainer inferedFacts, ArrayList<String> sentences) {
         if(rule.contains("->")){
             StringTokenizer tokens = new StringTokenizer(rule,"->");
 
             String leftToken = tokens.nextToken(); // lado esquerdo
             String rigthToken = tokens.nextToken(); // lado direito
 
-            if(facts.contains(leftToken)){
+            if(facts.contains(leftToken) || inferedFacts.contains(leftToken)){
                 StringBuilder builder = new StringBuilder();
                 builder
                         .append(leftToken)

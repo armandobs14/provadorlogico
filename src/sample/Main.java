@@ -40,14 +40,15 @@ public class Main extends Application {
 
         //Solucionador
         solver
-                .addRule(new Absorption())
-                .addRule(new ModusPonens())
                 .addRule(new ModusTolens())
+                .addRule(new ModusPonens())
+                .addRule(new Absorption())
                 .addRule(new ConstructiveDilemma())
                 .addRule(new DisjunctiveSyllogism())
                 .addRule(new HypotheticalSyllogism());
 
-        solver.addFactContainer(inferedFacts);
+        solver.setInferedFactContainer(inferedFacts);
+        solver.setInitialFactContainer(initFacts);
 
 
         solver.generateFactBase();

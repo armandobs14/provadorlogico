@@ -11,7 +11,7 @@ public class ModusTolens extends AbstractRule{
     FactContainer container;
 
     @Override
-    public boolean exec(String rule, FactContainer facts, ArrayList<String> sentences) {
+    public boolean exec(String rule, FactContainer facts, FactContainer inferedFacts, ArrayList<String> sentences) {
         if(rule.contains("->")){
             StringTokenizer tokens = new StringTokenizer(rule,"->");
 
@@ -21,7 +21,7 @@ public class ModusTolens extends AbstractRule{
             String notLeftToken = this.negToken(leftToken); // negação do token da esquerda
             String notRightToken = this.negToken(rigthToken); // negação do token da direita
 
-            if(facts.contains(notRightToken)){
+            if(facts.contains(notRightToken) || inferedFacts.contains(notRightToken)){
                 System.out.println(rule+" - Modus Tolens");
                 facts.addFact(notLeftToken);
                 //return true;

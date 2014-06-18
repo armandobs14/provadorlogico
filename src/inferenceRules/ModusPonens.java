@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 public class ModusPonens extends AbstractRule{
 
     @Override
-    public boolean exec(String rule, FactContainer facts, ArrayList<String> sentences) {
+    public boolean exec(String rule, FactContainer facts,FactContainer inferedFacts, ArrayList<String> sentences) {
         if(rule.contains("->")){
             StringTokenizer tokens = new StringTokenizer(rule,"->");
 
@@ -18,7 +18,7 @@ public class ModusPonens extends AbstractRule{
 
             if(facts.contains(leftToken)){
                 System.out.println(rule+" - Modus Ponens");
-                facts.addFact(rigthToken);
+                inferedFacts.addSpecialFact(rigthToken);
                 //return true;
             }
         }

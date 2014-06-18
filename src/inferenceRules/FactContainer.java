@@ -8,8 +8,8 @@ import java.util.List;
  * Created by armando on 11/06/14.
  */
 public class FactContainer {
-    public HashSet<String> factList;
-    public HashSet<String> specialFactList; // Gardará fatos variantes
+    private HashSet<String> factList;
+    private HashSet<String> specialFactList; // Gardará fatos variantes
 
     public FactContainer(){
 

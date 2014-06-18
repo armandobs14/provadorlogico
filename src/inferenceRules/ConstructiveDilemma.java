@@ -15,7 +15,7 @@ public class ConstructiveDilemma extends AbstractRule{
     }
 
     @Override
-    public boolean exec(String rule, FactContainer factContainer, ArrayList<String> sentences) {
+    public boolean exec(String rule, FactContainer factContainer, FactContainer inferedFactContainer, ArrayList<String> sentences) {
         if(rule.contains("->")){
             StringTokenizer tokens = new StringTokenizer(rule,"->");
 

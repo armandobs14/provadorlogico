@@ -8,23 +8,23 @@ import java.util.StringTokenizer;
  */
 public class DisjunctiveSyllogism extends AbstractRule{
     @Override
-    public boolean exec(String rule, FactContainer facts, ArrayList<String> senteces) {
+    public boolean exec(String rule, FactContainer facts,FactContainer inderedFacts, ArrayList<String> senteces) {
         if(rule.contains("v")){
             StringTokenizer tokens = new StringTokenizer(rule,"v");
 
             String leftToken = tokens.nextToken(); // lado esquerdo
-            String rigthToken = tokens.nextToken(); // lado direito
+            String rigthToken = tokens.nextToken(); // lado direiton
 
             String negatedLeftToken = this.negToken(leftToken); // negação do token da esquerda
             String negatedRightToken = this.negToken(leftToken); // negação do token da esquerda
 
-            if(facts.contains(negatedLeftToken)){
+            if(facts.contains(negatedLeftToken) || inderedFacts.contains(negatedLeftToken)){
                 System.out.println(rule+" - Disjunctive Syllogism");
-                facts.addFact(rigthToken);
+                inderedFacts.addFact(rigthToken);
                 return true;
             }else if(facts.contains(negatedRightToken)){
                 System.out.println(rule+" - Disjunctive Syllogism");
-                facts.addFact(leftToken);
+                inderedFacts.addFact(leftToken);
                 return true;
             }
         }

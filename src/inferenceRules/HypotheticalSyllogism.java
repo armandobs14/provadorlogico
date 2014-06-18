@@ -15,7 +15,7 @@ public class HypotheticalSyllogism extends AbstractRule{
     }
 
     @Override
-    public boolean exec(String rule, FactContainer factContainer, ArrayList<String> sentences) {
+    public boolean exec(String rule, FactContainer factContainer,FactContainer inderedFactContainer, ArrayList<String> sentences) {
         if(rule.contains("->")){
             StringTokenizer tokens = new StringTokenizer(rule,"->");
 
@@ -31,10 +31,10 @@ public class HypotheticalSyllogism extends AbstractRule{
                         .append("->")
                         .append(rigthToken);
 
-                factContainer.addSpecialFact(leftToken); // Exibindo tokens inferidos
+                inderedFactContainer.addSpecialFact(leftToken); // Exibindo tokens inferidos
 
 
-                factContainer.addFact(token);
+                inderedFactContainer.addFact(token);
 
                 sentences.remove(token+"->"+leftToken);
                 sentences.remove(leftToken+"->"+rigthToken);

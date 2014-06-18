@@ -7,11 +7,13 @@ import java.util.StringTokenizer;
  * Created by armando on 11/06/14.
  */
 public class Solver {
-    String sentence;
-    ArrayList<String> litteSentences = new ArrayList<String>();
+    private String sentence;
+    private ArrayList<String> litteSentences = new ArrayList<String>();
 
-    FactContainer container;
-    ArrayList<IRuleInference> rules;
+    private FactContainer inferedFactContainer;
+    private FactContainer initialFactContainer;
+
+    private ArrayList<IRuleInference> rules;
 
     public Solver(String sentence){
         this.sentence = sentence;
@@ -30,7 +32,7 @@ public class Solver {
 
                 litteSentences.add(temp);
             }else if(temp.length() == 1){
-                container.addFact(temp);
+                inferedFactContainer.addFact(temp);
                 System.out.println(temp+" - Simplification");
             }
         }
@@ -40,7 +42,7 @@ public class Solver {
             i++;
             for (int k = 0; k < rules.size(); k++) {
                 if(i== 0) break;
-                boolean success = rules.get(k).exec(litteSentences.get(i-1),this.container, litteSentences);
+                boolean success = rules.get(k).exec(litteSentences.get(i-1),this.initialFactContainer,this.inferedFactContainer, litteSentences);
                 if(success){
                     //litteSentences.remove(i-1);
                     i = 0;
@@ -54,9 +56,12 @@ public class Solver {
         return this;
     }
 
-    public Solver addFactContainer(FactContainer factContainer){
-        this.container = factContainer;
-        return this;
+    public void setInferedFactContainer(FactContainer factContainer){
+        this.inferedFactContainer = factContainer;
+    }
+
+    public void setInitialFactContainer(FactContainer factContainer){
+        this.initialFactContainer= factContainer;
     }
 
     public ArrayList<String> getLitteSentences(){
